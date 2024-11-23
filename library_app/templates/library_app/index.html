@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <style>
+        /* Reset some basic elements */
+        body, h1, h2, p, a, table, th, td, input, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #0B192C;
+            color: #FFFFFF;
+            line-height: 1.6;
+            margin: 0;
+        }
+        header, footer {
+            background-color: #1E3E62;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        header h1, footer p {
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #0B192C;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #1E3E62;
+            border-radius: 4px;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FF6500;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .search-bar button:hover {
+            background-color: #E55A00;
+        }
+        .add-book {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF6500;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .add-book:hover {
+            background-color: #E55A00;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 15px;
+            border: 1px solid #1E3E62;
+        }
+        th {
+            background-color: #1E3E62;
+            color: white;
+        }
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #FF6500;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1E3E62;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Library Management System</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <form method="get" action="{% url 'search_books' %}" style="flex-grow: 1;">
+                <input type="text" name="keyword" placeholder="Search by title or author">
+                <button type="submit">Search</button>
+            </form>
+            <a href="{% url 'add_book' %}" class="add-book">Add New Book</a>
+        </div>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.year }}</td>
+                <td class="actions">
+                    <a href="{% url 'update_book' book.id %}">Edit</a>
+                    <a href="{% url 'delete_book' book.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Library Management System</p>
+    </footer>
+</body>
+</html>

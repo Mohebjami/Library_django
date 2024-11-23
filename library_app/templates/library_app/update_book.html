@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <style>
+        body {
+            background-color: #0B192C;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #1E3E62;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #FF6500;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input,
+        button,
+        a {
+            width: 93%;
+            padding: 10px;
+            margin: 10px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button{
+            width: 96%;
+        }
+        input {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        input:focus {
+            outline: 2px solid #FF6500;
+        }
+
+        button {
+            background-color: #FF6500;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #E55A00;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #1E3E62;
+            color: #FFFFFF;
+            text-align: center;
+            display: block;
+        }
+
+        a:hover {
+            background-color: #0B192C;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Update Book</h1>
+        <form method="POST" action="{% url 'update_book' book.id %}">
+            {% csrf_token %}
+            <label for="title">Book Title</label>
+            <input type="text" id="title" name="title" value="{{ book.title }}" required>
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" value="{{ book.author }}" required>
+            <label for="year">Publication Year</label>
+            <input type="number" id="year" name="year" value="{{ book.year }}" required>
+            <button type="submit">Update Book</button>
+            <a href="{% url 'index' %}">Back to Home</a>
+        </form>
+    </div>
+</body>
+
+</html>
